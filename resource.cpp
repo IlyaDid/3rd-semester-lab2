@@ -86,6 +86,9 @@ resource resource::operator*(const size_t rv){
     consumption *= rv;
     production *= rv;
 }
+long int resource::profit(){
+    return (production - consumption)*price;
+}
 resource *resTable::sort(){
     resource buf;
     for(size_t i = 0; i < size; i++){
