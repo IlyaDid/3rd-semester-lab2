@@ -1,8 +1,14 @@
 #include <string>
 #include <map>
+#include <iostream>
+#include <limits>
+#include <cstring>
+#include <vector>
 #ifndef RESOURCE_HPP_
 #define RESOURCE_HPP_
 class resource{
+    friend std::ostream& operator<<(std::ostream& os, const resource&);
+    friend std::istream& operator>>(std::istream& is, resource&);
 private:
     std::string name;
     size_t consumption; //Kilogramms per day
@@ -20,31 +26,52 @@ public:
     void setConsumption(const size_t consumption);
     void setProduction(const size_t production);
     void setPrice(const size_t price);
-    void init();
-    void print();
     resource operator+(const resource& rv);
-    bool operator<=>(const resource& rv);
+    bool operator<=>(const resource& rv) const;
     resource operator*(const size_t rv);
     long int profit();
 };
-class resTable{
+
+
+class vec{
 private:
-    size_t size;
-    resource *table;
-    resource *sort();
+    resource *arr;
+    size_t sz;
 public:
-    resTable();
-    resTable(size_t am, const resource *arr);
+    vec();
+    explicit vec(const size_t& sz);
+    vec& operator=(const vec& rv);
+    vec& operator=(const vec&& rv);
+    ~vec();
+    resource& operator[](const size_t& pos);
+    void push_back(resource& res);
+    void pop_back();
+    size_t size();
+};
+
+
+class resTable{
+    friend std::ostream& operator<<(std::ostream& os, resTable&);
+    friend std::istream& operator>>(std::istream& is, resTable&);
+private:
+    vec table;
+    void sort();
+public:
+    resTable() = default;
+    explicit resTable(const size_t& am, const std::vector<resource>& arr);
     resTable(const resTable& t);
-    resTable(resTable&& t);
-    ~resTable();
+    resTable(const resTable&& t);
+    ~resTable() = default;
+    size_t size();
     resTable operator+=(const resource& rv);
     resource& operator[](const std::string& name);
-    resTable operator*(const size_t rv);
+    resTable operator*(const size_t& rv);
+    resTable& operator=(resTable& rv);
+    resTable& operator=(const resTable&& rv);
     int state();
-    void erase(std::string& name);
+    void erase(const std::string& name);
     size_t profit();
-    void rename(std::string& name, std::string& newname);
+    void rename(const std::string& name, const std::string& newname);
 };
 template <class T>
 T getNum(T min = std::numeric_limits<T>::min(), T max = std::numeric_limits<T>::max()){
@@ -58,14 +85,13 @@ T getNum(T min = std::numeric_limits<T>::min(), T max = std::numeric_limits<T>::
         else if (std::cin.fail()) { // прочие ошибки (неправильный формат ввода)
             std::cin.clear(); // очищаем флаги состояния потока
         // игнорируем все символы до конца строки
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "You are wrong; repeat please!" << std::endl;
-    }
-    else{
-        //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        if (a >= min && a <= max) // если число входит в заданный диапазон
-            return a;
-    }
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "You are wrong; repeat please!" << std::endl;
+        } else{
+            //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            if (a >= min && a <= max) // если число входит в заданный диапазон
+                return a;
+        }
     }
 }
 #endif
