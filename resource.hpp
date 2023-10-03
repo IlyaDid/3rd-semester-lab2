@@ -27,7 +27,7 @@ public:
     void setProduction(const size_t production);
     void setPrice(const size_t price);
     resource operator+(const resource& rv);
-    bool operator<=>(const resource& rv) const;
+    int operator<=>(const resource& rv) const;
     resource operator*(const size_t rv);
     long int profit();
 };
@@ -41,11 +41,12 @@ public:
     vec();
     explicit vec(const size_t& sz);
     vec& operator=(const vec& rv);
-    vec& operator=(const vec&& rv);
+    vec& operator=(vec&& rv);
     ~vec();
     resource& operator[](const size_t& pos);
     void push_back(resource& res);
     void pop_back();
+    void erase(const std::string& name);
     size_t size();
 };
 
@@ -60,14 +61,14 @@ public:
     resTable() = default;
     explicit resTable(const size_t& am, const std::vector<resource>& arr);
     resTable(const resTable& t);
-    resTable(const resTable&& t);
+    resTable(resTable&& t);
     ~resTable() = default;
     size_t size();
     resTable operator+=(const resource& rv);
     resource& operator[](const std::string& name);
     resTable operator*(const size_t& rv);
     resTable& operator=(resTable& rv);
-    resTable& operator=(const resTable&& rv);
+    resTable& operator=(resTable&& rv);
     int state();
     void erase(const std::string& name);
     size_t profit();
