@@ -14,6 +14,7 @@ resource::resource(){
     @param consumption Consumption of resource(kilogramms/day)
     @param production Production of resource(kilogramms/day)
     @param price Price of resource(universal unit/kilogramm)
+    
     Full constructor
 */
 resource::resource(const std::string& name, const size_t consumption, const size_t production, const size_t price){
@@ -25,6 +26,7 @@ resource::resource(const std::string& name, const size_t consumption, const size
 /*!
     @param name Name of resource
     @param price Price of resource(universal unit/kilogramm)
+    
     Partial constructor
 */
 resource::resource(const std::string& name, const size_t price){
@@ -35,6 +37,7 @@ resource::resource(const std::string& name, const size_t price){
 }
 /*!
     @returns name Name of resource
+    
     Name getter
 */
 std::string resource::getName(){
@@ -42,6 +45,7 @@ std::string resource::getName(){
 }
 /*!
     @returns consumption Consumption of resource(kilogramms/day)
+    
     Consumption getter
 */
 size_t resource::getConsumption(){
@@ -49,6 +53,7 @@ size_t resource::getConsumption(){
 }
 /*!
     @returns production Production of resource(kilogramms/day)
+    
     Production getter
 */
 size_t resource::getProduction(){
@@ -56,6 +61,7 @@ size_t resource::getProduction(){
 }
 /*!
     @returns price Price of resource(universal unit/kilogramm)
+    
     Price getter
 */
 size_t resource::getPrice(){
@@ -63,6 +69,7 @@ size_t resource::getPrice(){
 }
 /*!
     @param name Name of resource
+    
     Name setter
 */
 void resource::setName(const std::string& name){
@@ -70,13 +77,15 @@ void resource::setName(const std::string& name){
 }
 /*!
     @param consumption Consumption of resource(kilogramms/day)
+    
     Consumption setter
 */
 void resource::setConsumption(const size_t consumption){
     this->consumption = consumption;
 }
 /*!
-    @param prodction Production of resource(kilogramms/day)
+    @param production Production of resource(kilogramms/day)
+    
     Production setter
 */
 void resource::setProduction(const size_t production){
@@ -84,6 +93,7 @@ void resource::setProduction(const size_t production){
 }
 /*!
     @param price Price of resource(universal unit/kilogramm)
+    
     Price setter
 */
 void resource::setPrice(const size_t price){
@@ -93,6 +103,7 @@ void resource::setPrice(const size_t price){
     @param os Output stream
     @param res Resource
     @returns Output stream
+    
     Output of resource
 */
 std::ostream& operator<<(std::ostream& os, const resource& res){
@@ -106,6 +117,7 @@ std::ostream& operator<<(std::ostream& os, const resource& res){
     @param is Input stream
     @param res Resource
     @returns Input stream
+    
     Input of resource
 */
 std::istream& operator>>(std::istream& is, resource& res){
@@ -118,7 +130,8 @@ std::istream& operator>>(std::istream& is, resource& res){
 /*!
     @param rv Resource
     @returns Resource
-    @throws Different names addition
+    @throws std::runtime_error Different names addition
+    
     Sum of resources with same name(consumption and production are added and price is minimal)
 */
 resource resource::operator+(const resource& rv){
@@ -133,6 +146,7 @@ resource resource::operator+(const resource& rv){
 /*!
     @param rv Resource
     @returns Result of comparison
+    
     Comparison of resources by name
 */
 int resource::operator<=>(const resource& rv) const{
@@ -146,6 +160,7 @@ int resource::operator<=>(const resource& rv) const{
 /*!
     @param rv Multiplier
     @returns Resource
+    
     Multiplication of turnover(consumption and production)
 */
 resource resource::operator*(const size_t rv){
@@ -155,6 +170,7 @@ resource resource::operator*(const size_t rv){
 }
 /*!
     @returns Profit
+    
     Calculation of weekly profit
 */
 long int resource::profit(){
@@ -171,7 +187,8 @@ vec::vec(){
 }
 /*!
     @param sz Size of vector
-    @throws Bad alloc
+    @throws std::bad_alloc Bad alloc
+    
     Constryctor by size
 */
 vec::vec(const size_t& sz){
@@ -186,6 +203,7 @@ vec::vec(const size_t& sz){
 /*!
     @param rv Vector to copy
     @returns Vector
+    
     Copy assignment operator
 */
 vec &vec::operator=(const vec& rv){
@@ -201,6 +219,7 @@ vec &vec::operator=(const vec& rv){
 /*!
     @param rv Vector to move
     @returns Vector
+    
     Move assignment operator
 */
 vec &vec::operator=(vec&& rv){
@@ -221,7 +240,8 @@ vec::~vec(){
 /*!
     @param pos Position in vector
     @returns Resource
-    @throws Access to unallocated memory
+    @throws std::runtime_error Access to unallocated memory
+    
     Access to element of vector by position
 */
 resource &vec::operator[](const size_t& pos){
@@ -231,7 +251,8 @@ resource &vec::operator[](const size_t& pos){
 }
 /*!
     @param res Resource
-    @throws Bad alloc
+    @throws std::bad_alloc Bad alloc
+    
     Adds resource to the end of vector
 */
 void vec::push_back(resource& res){
@@ -248,8 +269,9 @@ void vec::push_back(resource& res){
     sz++;
 }
 /*!
-    @throws Empty array
-    @throws Bad alloc
+    @throws std::runtime_error Empty array
+    @throws std::bad_alloc Bad alloc
+    
     Deletes resource from the end of vector
 */
 void vec::pop_back(){
@@ -274,7 +296,8 @@ void vec::pop_back(){
 }
 /*!
     @param name Name of element
-    @throws Out of range
+    @throws std::runtime_error Out of range
+    
     Deletes element by name
 */
 void vec::erase(const std::string& name){
@@ -290,6 +313,7 @@ void vec::erase(const std::string& name){
 }
 /*!
     @returns Size of vector
+    
     Get size of vector
 */
 size_t vec::size(){
@@ -299,6 +323,7 @@ size_t vec::size(){
 
 /*!
     @returns Size of table
+    
     Get size of table
 */
 size_t resTable::size(){
@@ -319,6 +344,7 @@ void resTable::sort(){
 /*!
     @param am Size
     @param arr Vector of resources
+    
     Constructor by copying from vector
 */
 resTable::resTable(const size_t& am, const std::vector<resource>& arr){
@@ -329,6 +355,7 @@ resTable::resTable(const size_t& am, const std::vector<resource>& arr){
 }
 /*!
     @param t Resource table
+    
     Copy constructor
 */
 resTable::resTable(const resTable& t){
@@ -336,6 +363,7 @@ resTable::resTable(const resTable& t){
 }
 /*!
     @param t Resource table
+    
     Move constructor
 */
 resTable::resTable(resTable&& t){
@@ -345,6 +373,7 @@ resTable::resTable(resTable&& t){
     @param os Output stream
     @param res Resource table
     @returns Output stream
+    
     Output of resource table
 */
 std::ostream& operator<<(std::ostream& os, resTable& res){
@@ -358,6 +387,7 @@ std::ostream& operator<<(std::ostream& os, resTable& res){
     @param is Input stream
     @param res Resource table
     @returns Input stream
+    
     Input of resource table
 */
 std::istream& operator>>(std::istream& is, resTable& res){
@@ -372,7 +402,8 @@ std::istream& operator>>(std::istream& is, resTable& res){
 /*!
     @param name Name of resource
     @returns Resource
-    @throws Not found
+    @throws std::runtime_error Not found
+    
     Access to element of table by its name
 */
 resource &resTable::operator[](const std::string& name){
@@ -393,7 +424,8 @@ resource &resTable::operator[](const std::string& name){
 /*!
     @param rv Resource
     @returns Resource table
-    @throws Already in table
+    @throws std::runtime_error Already in table
+    
     Adding new element to table
 */
 resTable resTable::operator+=(const resource& rv){
@@ -411,6 +443,7 @@ resTable resTable::operator+=(const resource& rv){
 /*!
     @param rv Multiplier
     @returns Resource table
+    
     Multiplies turnover of all elements
 */
 resTable resTable::operator*(const size_t& rv){
@@ -421,6 +454,7 @@ resTable resTable::operator*(const size_t& rv){
 /*!
     @param rv Resource table
     @returns Resource table
+    
     Copy assignment operator
 */
 resTable &resTable::operator=(resTable& rv){
@@ -431,6 +465,7 @@ resTable &resTable::operator=(resTable& rv){
 /*!
     @param rv Resource table
     @returns Resource table
+    
     Move assignment operator
 */
 resTable &resTable::operator=(resTable&& rv){
@@ -440,6 +475,7 @@ resTable &resTable::operator=(resTable&& rv){
 }
 /*!
     @returns Empty or Full
+    
     State of table
 */
 int resTable::state(){
@@ -450,6 +486,7 @@ int resTable::state(){
 }
 /*!
     @param name Name of resource
+    
     Delete element by name
 */
 void resTable::erase(const std::string& name){
@@ -457,6 +494,7 @@ void resTable::erase(const std::string& name){
 }
 /*!
     @returns Profit
+    
     Calculates profit of all resources in table
 */
 size_t resTable::profit(){
@@ -468,6 +506,7 @@ size_t resTable::profit(){
 /*!
     @param name Resource name
     @param newname New resource name
+    
     Renames element
 */
 void resTable::rename(const std::string& name, const std::string& newname){
