@@ -27,7 +27,9 @@ public:
     void setProduction(const size_t production);
     void setPrice(const size_t price);
     resource operator+(const resource& rv);
-    int operator<=>(const resource& rv) const;
+    bool operator<(const resource& rv) const;
+    bool operator>(const resource& rv) const;
+    bool operator==(const resource& rv) const;
     resource operator*(const size_t rv);
     long int profit();
 };

@@ -101,10 +101,10 @@ void res_sum(resource& l, const resource& r){
     }
 }
 void res_equal(const resource& l, const resource& r){
-    if((l <=> r) == 0)
+    if(l == r)
         std::cout << "Ресурсы равны" << std::endl;
-    else if((l <=> r) > 0) std::cout << "Первый ресурс < второго" << std::endl;
-    else if((l <=> r) < 0) std::cout << "Второй ресурс < первого" << std::endl;
+    else if(l > r) std::cout << "Первый ресурс < второго" << std::endl;
+    else if(l < r) std::cout << "Второй ресурс < первого" << std::endl;
 }
 void res_profit(resource& res){
     std::cout << "Ориентировочная прибыльность: " << res.profit() << std::endl;

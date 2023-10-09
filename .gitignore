@@ -1,6 +1,11 @@
 build
 html
 latex
+tests
 *.vscode
 *.json
 *.bak
+*.css
+*.html
+*.gcda
+*.gcno

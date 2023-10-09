@@ -149,13 +149,17 @@ resource resource::operator+(const resource& rv){
     
     Comparison of resources by name
 */
-int resource::operator<=>(const resource& rv) const{
-    if(name == rv.name)
-        return 0;
-    else if(name < rv.name)
-        return -1;
-    else
-        return 1;
+bool resource::operator<(const resource& rv) const{
+    if(name < rv.name) return 1;
+    else return 0;
+}
+bool resource::operator>(const resource& rv) const{
+    if(name > rv.name) return 1;
+    else return 0;
+}
+bool resource::operator==(const resource& rv) const{
+    if(name == rv.name) return 1;
+    else return 0;
 }
 /*!
     @param rv Multiplier
@@ -189,7 +193,7 @@ vec::vec(){
     @param sz Size of vector
     @throws std::bad_alloc Bad alloc
     
-    Constryctor by size
+    Constructor by size
 */
 vec::vec(const size_t& sz){
     try{
