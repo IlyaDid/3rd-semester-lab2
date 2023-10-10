@@ -107,10 +107,10 @@ void resource::setPrice(const size_t price){
     Output of resource
 */
 std::ostream& operator<<(std::ostream& os, const resource& res){
-    std::cout << "Имя: " << res.name << std::endl;
-    std::cout << "Потребление: " << res.consumption << std::endl;
-    std::cout << "Производство: " << res.production << std::endl;
-    std::cout << "Цена: " << res.price << std::endl;
+    os << "Имя: " << res.name << std::endl;
+    os << "Потребление: " << res.consumption << std::endl;
+    os << "Производство: " << res.production << std::endl;
+    os << "Цена: " << res.price << std::endl;
     return os;
 }
 /*!
@@ -121,10 +121,7 @@ std::ostream& operator<<(std::ostream& os, const resource& res){
     Input of resource
 */
 std::istream& operator>>(std::istream& is, resource& res){
-    std::cin >> res.name;
-    res.consumption = getNum<size_t>();
-    res.production = getNum<size_t>();
-    res.price = getNum<size_t>();
+    is >> res.name >> res.consumption >> res.production >> res.price;
     return is;
 }
 /*!
@@ -382,8 +379,8 @@ resTable::resTable(resTable&& t){
 */
 std::ostream& operator<<(std::ostream& os, resTable& res){
     for(size_t i = 0; i < res.size(); i++){
-        std::cout << "Имя: " << res.table[i].getName() << " " << "Потребление: " << res.table[i].getConsumption() << " ";
-        std::cout << "Производство: " << res.table[i].getProduction() << " " << "Цена: " << res.table[i].getPrice() << std::endl;
+        os << "Имя: " << res.table[i].getName() << " " << "Потребление: " << res.table[i].getConsumption() << " ";
+        os << "Производство: " << res.table[i].getProduction() << " " << "Цена: " << res.table[i].getPrice() << std::endl;
     }
     return os;
 }
@@ -396,9 +393,10 @@ std::ostream& operator<<(std::ostream& os, resTable& res){
 */
 std::istream& operator>>(std::istream& is, resTable& res){
     resource buf;
-    size_t sz = getNum<size_t>();
+    size_t sz;
+    is >> sz;
     for(size_t i = 0; i < sz; i++){
-        std::cin >> buf;
+        is >> buf;
         res += buf;
     }
     return is;

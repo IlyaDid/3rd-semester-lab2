@@ -51,8 +51,8 @@ TEST_CASE("Resource class"){
         r3 = r3 * 3;
         REQUIRE(r3.getConsumption() == 3*345);
         REQUIRE(r3.getProduction() == 3*500);
-        /*resource r4;
-        std::stringstream in("Cola\n200\n234\n167\n");
+        resource r4;
+        std::stringstream in("Cola 200 234 167");
         in >> r4;
         REQUIRE(r4.getName() == "Cola");
         REQUIRE(r4.getConsumption() == 200);
@@ -60,7 +60,7 @@ TEST_CASE("Resource class"){
         REQUIRE(r4.getPrice() == 167);
         std::stringstream out;
         out << r4;
-        REQUIRE(out.str() == "Имя: Cola\nПотребление: 200\nПроизводство: 234\nЦена: 167\n");*/
+        REQUIRE(out.str() == "Имя: Cola\nПотребление: 200\nПроизводство: 234\nЦена: 167\n");
     }
     SECTION("Functional methods"){
         resource r("Cola", 345, 500, 100);
@@ -143,6 +143,15 @@ TEST_CASE("resTable class"){
         t3 = t2;
         REQUIRE(t3["Cola"].getConsumption() == 20);
         REQUIRE(t3["Cola"].getProduction() == 24);
+        resTable t4;
+        std::stringstream in("1 Cola 200 234 167");
+        in >> t4;
+        REQUIRE(t4["Cola"].getConsumption() == 200);
+        REQUIRE(t4["Cola"].getProduction() == 234);
+        REQUIRE(t4["Cola"].getPrice() == 167);
+        std::stringstream out;
+        out << t4;
+        REQUIRE(out.str() == "Имя: Cola Потребление: 200 Производство: 234 Цена: 167\n");
     }
     SECTION("Functional methods"){
         resource r1("Cola", 10, 12, 100);
@@ -160,8 +169,8 @@ TEST_CASE("resTable class"){
     }
     SECTION("Test exception"){
         resource r1("Cola", 10, 12, 100);
-        resTable t;
-        t += r1;
-        REQUIRE_THROWS(r1 = t["Fish"]);
+        resTable t1;
+        t1 += r1;
+        REQUIRE_THROWS(r1 = t1["Fish"]);
     }
 }
